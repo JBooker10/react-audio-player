@@ -7,7 +7,7 @@ import AudioMetaData from "./AudioMetaData";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     audioControls: {
-      height: 100,
+      height: 110,
       width: "100%",
       position: "fixed",
       bottom: 0,
@@ -31,9 +31,9 @@ const MediaControls = (): JSX.Element => {
 
   return (
     <div className={classes.audioControls}>
-      <AudioMetaData />
+      <AudioMetaData audio={audioCTX} />
       <PlayBack audio={audioCTX} />
-      <div className={classes.flex} />
+      <div className={classes.flex}>Hello World</div>
     </div>
   );
 };

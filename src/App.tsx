@@ -8,6 +8,8 @@ import MusicState from "./context/music/MusicState";
 
 import Login from "./components/Views/Login";
 import Home from "./components/Views/Home";
+import Artists from "./components/Views/Artists";
+import Favorites from "./components/Views/Favorites";
 import Albums from "./components/Views/Albums";
 import Tracks from "./components/Views/Tracks";
 import PrivateRoute from "./components/Utils/PrivateRoute";
@@ -31,7 +33,9 @@ const App: React.FC = () => {
               <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/albums" component={Albums} />
+              <PrivateRoute exact path="/artists" component={Artists} />
               <PrivateRoute exact path="/tracks" component={Tracks} />
+              <PrivateRoute exact path="/favorites" component={Favorites} />
             </MusicState>
           </LibraryState>
         </Switch>

@@ -63,8 +63,8 @@ const AuthenticationState = (props: any): JSX.Element => {
       console.log(err.response);
       dispatch({
         type: types.LOGIN_FAIL,
-        payload: err.response.data,
-        errors: err.response.data,
+        payload: err.response.data || err,
+        errors: err.response.data || err,
         user: {}
       });
       setTimeout(
@@ -95,8 +95,8 @@ const AuthenticationState = (props: any): JSX.Element => {
     } catch (err) {
       dispatch({
         type: types.LOGIN_FAIL,
-        payload: err.response.data,
-        errors: err.response.data,
+        payload: err.response.data || err,
+        errors: err.response.data || err,
         user: {}
       });
     }

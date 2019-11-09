@@ -1,4 +1,5 @@
 import React from "react";
+
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const NavMenu = (props: any) => {
-  const { anchorEl, onClose, logoutUser } = props;
+  const { anchorEl, onClose, logoutUser, stopAudio } = props;
   const classes = useStyles();
 
   return (
@@ -49,7 +50,14 @@ const NavMenu = (props: any) => {
     >
       <MenuItem onClick={onClose}>Profile</MenuItem>
       <MenuItem onClick={onClose}>My account</MenuItem>
-      <MenuItem onClick={logoutUser}>Logout</MenuItem>
+      <MenuItem
+        onClick={() => {
+          logoutUser();
+          stopAudio();
+        }}
+      >
+        Logout
+      </MenuItem>
     </Menu>
   );
 };

@@ -18,6 +18,7 @@ import {
   createStyles,
   fade
 } from "@material-ui/core/styles";
+import MusicCTX from "./../../context/music/musicContext";
 import AuthContext from "./../../context/auth/authContext";
 
 const drawerWidth = 240;
@@ -95,6 +96,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const HomeNavbar = ({ drawerToggle }: any): JSX.Element => {
   const authContext = useContext(AuthContext);
+  const musicContext = useContext(MusicCTX);
   const { logoutUser, user, loading } = authContext;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const classes = useStyles();
@@ -150,7 +152,12 @@ const HomeNavbar = ({ drawerToggle }: any): JSX.Element => {
           </Button>
         </Toolbar>
       </AppBar>
-      <NavMenu anchorEl={anchorEl} onClose={onClose} logoutUser={logoutUser} />
+      <NavMenu
+        anchorEl={anchorEl}
+        onClose={onClose}
+        logoutUser={logoutUser}
+        stopAudio={musicContext.stopAudio}
+      />
     </Fragment>
   );
 };

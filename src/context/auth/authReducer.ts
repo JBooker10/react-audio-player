@@ -1,4 +1,5 @@
 import { IAuthState, IAuthAction } from "./authContext";
+import { AudioDataService } from "./../music/audioDataService"
 import { types } from "../types";
 
 
@@ -27,7 +28,6 @@ export const authReducer: React.Reducer<IAuthState, IAuthAction> = (state, actio
         case types.LOGOUT_USER:
         case types.LOGIN_FAIL:
         case types.AUTH_ERROR:
-            localStorage.removeItem("token");
             return {
                 ...state,
                 token: null,

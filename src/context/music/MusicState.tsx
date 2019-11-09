@@ -33,6 +33,7 @@ const MusicState = (props: any): JSX.Element => {
 
   const [isPlaying, setPlaying] = useState(false);
   const [uuid, setUUID] = useState("");
+  const [metaData, setMetaData] = useState({});
   const [audioService] = useState(new AudioDataService());
 
   const [state, dispatch] = useReducer<React.Reducer<IState, IAction>>(
@@ -40,7 +41,7 @@ const MusicState = (props: any): JSX.Element => {
     initialState
   );
 
-  const getAudio = async (url: string, uuid: string) => {
+  const getAudio = async (url: string, uuid: string, metadata: {}) => {
     // delete axios.defaults.headers.common["Authorization"];
     try {
       //   audioService.stopAudio();
@@ -50,6 +51,7 @@ const MusicState = (props: any): JSX.Element => {
         })
         .then(() => {
           setUUID(uuid);
+          setMetaData(metadata);
           setPlaying(true);
         });
     } catch (err) {
@@ -69,6 +71,10 @@ const MusicState = (props: any): JSX.Element => {
     //   .catch(err => console.log(err));
   };
 
+  const getCurrentPosition = () => {
+    return audioService.getCurrentPosition();
+  };
+
   //   const getAudio = (stream: string, uuid: string) => {
   //     audioService
   //       .getAudio(stream)
@@ -82,6 +88,14 @@ const MusicState = (props: any): JSX.Element => {
   const pauseAudio = () => {
     audioService.pauseAudio();
     setPlaying(audioService.playing);
+  };
+
+  const getCurrentTime = () => {
+    return audioService.getCurrentTime();
+  };
+
+  const getDuration = () => {
+    return audioService.getDuration();
   };
 
   const playAudio = () => {
@@ -106,6 +120,10 @@ const MusicState = (props: any): JSX.Element => {
         pauseAudio,
         playAudio,
         stopAudio,
+        metaData,
+        getCurrentTime,
+        getCurrentPosition,
+        getDuration,
         uuid
       }}
     >

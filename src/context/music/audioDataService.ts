@@ -34,9 +34,8 @@ export class AudioDataService {
             this.buffer = audio;
             this.connection()
             this.loaded = true;
-            // this.playAudio()
-            this.source.start()
-            // this.playing = true;
+            this.source.start();
+            this.playing = true;
         })
     }
 
@@ -76,10 +75,12 @@ export class AudioDataService {
     // }
 
     pauseAudio() {
+        this.playing = false;
         this.ctx.suspend()
     }
 
     playAudio() {
+        this.playing = true;
         this.ctx.resume()
     }
 
@@ -92,17 +93,31 @@ export class AudioDataService {
     }
 
 
-    getCurrentPosition(): number {
+    getCurrentPosition() {
         this.position = this.playing ?
             this.ctx.currentTime - this.startTime : this.position;
-        if (this.position >= this.buffer.duration) {
-            this.position = this.buffer.duration;
+
+        if (this.position >= this.source.duration) {
+            this.position = this.source.duration;
             this.pauseAudio();
         }
         return this.position;
     }
 
+    getCurrentTime() {
+        if (this.playing) {
+            return this.ctx.currentTime
+        } else if (this.ctx.currentTime >= this.getDuration()) {
+            return this.getDuration()
+        }
+        console.log(this.position)
+        return this.position;
+    }
+
     getDuration(): number {
-        return this.buffer.duration;
+        if (this.playing) {
+            return this.buffer.duration;
+        }
+        return 0
     }
 }

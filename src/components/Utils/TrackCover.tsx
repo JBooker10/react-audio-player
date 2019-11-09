@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Paper, Typography } from "@material-ui/core";
+import Playing, { PlayingSquare } from "./../Icons/Playing";
 import MusicNote from "./../Icons/MusicNote";
 import Play from "./../Icons/Play";
 import Pause from "./../Icons/Pause";
@@ -20,9 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center",
       cursor: "pointer"
-    },
-    "& :after": {
-      content: "Hello"
     },
     title: {
       color: "#e2e1ff",
@@ -54,15 +52,12 @@ interface ITrack {
 
 const TrackCover = (props: any): JSX.Element => {
   const classes = useStyles();
-  const [play, setPlay] = useState(false);
   const [playVisible, setPlayVisible] = useState(false);
-  const [audioLoaded, setAudioLoaded] = useState(false);
+
   const {
     track: { Artist, Album },
     audio
   } = props;
-
-  console.log(audio.uuid, props.track.Hash);
 
   const isPlaying = audio.isPlaying && audio.uuid === props.track.Hash;
 
@@ -71,20 +66,16 @@ const TrackCover = (props: any): JSX.Element => {
       className={classes.play}
       onClick={() => {
         if (audio.uuid === props.track.Hash) {
-          //   console.log("hello");
           audio.playAudio();
         } else {
           audio.stopAudio();
-          audio.getAudio(props.track.Stream, props.track.Hash);
+          audio.getAudio(props.track.Stream, props.track.Hash, {
+            artist: Artist.Name,
+            track: props.track.Title,
+            albumCover: Album.Cover,
+            album: Album.Title
+          });
         }
-        // if (!audioLoaded) {
-        //   audio.stopAudio();
-        //   audio.getAudio(props.track.Stream, props.track.Hash);
-        //   setAudioLoaded(true);
-        // }
-
-        // audio.playAudio();
-        // setAudioLoaded(false);
       }}
     >
       <Play color="#e2e1ff" height={80} width={80} />
@@ -92,16 +83,7 @@ const TrackCover = (props: any): JSX.Element => {
   );
 
   const PauseIcon = (
-    <div
-      className={classes.play}
-      onClick={() => {
-        // if (audio.uuid !== props.track.Hash) {
-        //   audio.stopAudio();
-        //   audio.getAudio(props.track.Stream, props.track.Hash);
-        // }
-        audio.pauseAudio();
-      }}
-    >
+    <div className={classes.play} onClick={audio.pauseAudio}>
       <Pause color="#e2e1ff" height={80} width={80} className="" />
     </div>
   );
@@ -113,8 +95,9 @@ const TrackCover = (props: any): JSX.Element => {
       <Paper className={classes.paper}>
         {Album.CoverXL ? (
           <div
-            onMouseEnter={() => setPlayVisible(true)}
-            onMouseLeave={() => setPlayVisible(false)}
+            onClick={() => setPlayVisible(isPlaying)}
+            onMouseEnter={() => !isPlaying && setPlayVisible(!isPlaying)}
+            onMouseLeave={() => setPlayVisible(isPlaying)}
           >
             {playVisible && control}
             <img src={Album.CoverXL} alt="" className={classes.image} />
@@ -125,6 +108,7 @@ const TrackCover = (props: any): JSX.Element => {
       </Paper>
       <Typography className={classes.title}>{props.track.Title}</Typography>
       <Typography className={classes.subtitle}> {Artist.Name}</Typography>
+      {isPlaying && <Playing />}
     </div>
   );
 };
