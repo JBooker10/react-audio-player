@@ -4,7 +4,6 @@ import axios from "axios";
 import { libraryReducer } from "./libraryReducer";
 import LibraryContext, { IState, IAction } from "./libraryContext";
 import { types } from "./../types";
-import { response } from "express";
 
 const api = "http://localhost:8000/v1";
 
@@ -22,6 +21,7 @@ const LibraryState = (props: any): JSX.Element => {
     artists: [],
     albums: [],
     album: {} as any,
+    track: {} as any,
     errors: {},
     payload: {},
     loading: true
@@ -38,6 +38,19 @@ const LibraryState = (props: any): JSX.Element => {
       .then(response =>
         dispatch({
           type: types.GET_TRACKS,
+          payload: response.data,
+          errors: {}
+        })
+      )
+      .catch(e => console.log(e));
+  };
+
+  const getTrack = (hash: string) => {
+    axios
+      .get(api + `/library/tracks/${hash}`)
+      .then(response =>
+        dispatch({
+          type: types.GET_TRACK,
           payload: response.data,
           errors: {}
         })
@@ -84,14 +97,16 @@ const LibraryState = (props: any): JSX.Element => {
       .catch(e => console.log(e));
   };
 
-  const { user, tracks, artists, albums, album, loading } = state;
+  const { user, track, tracks, artists, albums, album, loading } = state;
 
   return (
     <LibraryContext.Provider
       value={{
         user,
         tracks,
+        track,
         getTracks,
+        getTrack,
         artists,
         getArtists,
         getAlbums,

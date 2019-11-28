@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
 import Playing, { PlayingSquare } from "./../Icons/Playing";
 import MusicNote from "./../Icons/MusicNote";
@@ -106,7 +107,9 @@ const TrackCover = (props: any): JSX.Element => {
           <MusicNote color="#e2e1ff" height={70} width={70} />
         )}
       </Paper>
-      <Typography className={classes.title}>{props.track.Title}</Typography>
+      <Link to={`tracks/${props.track.Hash}`}>
+        <Typography className={classes.title}>{props.track.Title}</Typography>
+      </Link>
       <Typography className={classes.subtitle}> {Artist.Name}</Typography>
       {isPlaying && <Playing />}
     </div>

@@ -12,6 +12,7 @@ import Artists from "./components/Views/Artists";
 import Favorites from "./components/Views/Favorites";
 import Albums from "./components/Views/Albums";
 import Tracks from "./components/Views/Tracks";
+import Track from "./components/Views/Track";
 import PrivateRoute from "./components/Utils/PrivateRoute";
 import { AuthorizeToken } from "./config/AuthorizeToken";
 
@@ -35,6 +36,7 @@ const App: React.FC = () => {
               <PrivateRoute exact path="/albums" component={Albums} />
               <PrivateRoute exact path="/artists" component={Artists} />
               <PrivateRoute exact path="/tracks" component={Tracks} />
+              <PrivateRoute exact path="/tracks/:id" component={Track} />
               <PrivateRoute exact path="/favorites" component={Favorites} />
             </MusicState>
           </LibraryState>

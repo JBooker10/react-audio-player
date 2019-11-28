@@ -1,11 +1,7 @@
 import React, { useReducer, useState } from "react";
-import axios from "axios";
 import { AudioDataService } from "./audioDataService";
-
 import { musicReducer } from "./musicReducer";
 import MusicContext, { IState, IAction } from "./musicContext";
-import { types } from "./../types";
-import { response } from "express";
 
 // export const audioService = new AudioDataService();
 
@@ -32,6 +28,7 @@ const MusicState = (props: any): JSX.Element => {
   };
 
   const [isPlaying, setPlaying] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [uuid, setUUID] = useState("");
   const [metaData, setMetaData] = useState({});
   const [audioService] = useState(new AudioDataService());
@@ -42,9 +39,7 @@ const MusicState = (props: any): JSX.Element => {
   );
 
   const getAudio = async (url: string, uuid: string, metadata: {}) => {
-    // delete axios.defaults.headers.common["Authorization"];
     try {
-      //   audioService.stopAudio();
       let resp = await get(url)
         .then(resp => {
           audioService.getBinaryData(resp);
@@ -53,37 +48,20 @@ const MusicState = (props: any): JSX.Element => {
           setUUID(uuid);
           setMetaData(metadata);
           setPlaying(true);
+          setLoaded(true);
         });
     } catch (err) {
       console.log(err);
     }
-
-    // return axios({
-    //   method: "get",
-    //   url: url,
-    //   responseType: "arraybuffer"
-    // })
-    //   .then(res => audioService.getBinaryData(res.data))
-    //   .then(() => {
-    //     setUUID(uuid);
-    //     setPlaying(true);
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   const getCurrentPosition = () => {
     return audioService.getCurrentPosition();
   };
 
-  //   const getAudio = (stream: string, uuid: string) => {
-  //     audioService
-  //       .getAudio(stream)
-  //       .then(() => {
-  //         setUUID(uuid);
-  //         setPlaying(true);
-  //       })
-  //       .catch(err => console.log(err));
-  //   };
+  const rewindAudio = () => {
+    return audioService.rewindAudio();
+  };
 
   const pauseAudio = () => {
     audioService.pauseAudio();
@@ -115,10 +93,12 @@ const MusicState = (props: any): JSX.Element => {
       value={{
         isPlaying,
         loading,
+        loaded,
         audioData,
         getAudio,
         pauseAudio,
         playAudio,
+        rewindAudio,
         stopAudio,
         metaData,
         getCurrentTime,

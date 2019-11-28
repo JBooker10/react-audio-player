@@ -13,6 +13,12 @@ export const libraryReducer: React.Reducer<IState | any, IAction> = (
                 tracks: action.payload,
                 loading: false
             };
+        case types.GET_TRACK:
+            return {
+                ...state,
+                track: action.payload,
+                loading: false
+            };
         case types.GET_ARTISTS:
             return {
                 ...state,

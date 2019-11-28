@@ -41,7 +41,7 @@ const Albums = () => {
       <Box className={classes.box}>
         {tracks.length > 0 &&
           tracks.map((track: any) => (
-            <TrackCover key={track.SpotifyID} track={track} audio={audio} />
+            <TrackCover key={track.Hash} track={track} audio={audio} />
           ))}
       </Box>
     </Container>

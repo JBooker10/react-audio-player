@@ -115,8 +115,8 @@ const Playing = () => {
 export const PlayingSquare = () => {
   return (
     <svg
-      width={20}
-      height={20}
+      width={23}
+      height={23}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"

@@ -53,6 +53,7 @@ export interface IState {
     payload: any;
     loading: boolean;
     tracks: any;
+    track: any;
     artists: any;
     albums: any;
     album: any;

@@ -16,10 +16,6 @@ export class AudioDataService {
         this.ctx = new AudioContext();
     }
 
-
-
-
-
     getAudio = (url: string) => {
         delete axios.defaults.headers.common["Authorization"];
         return axios({
@@ -56,23 +52,13 @@ export class AudioDataService {
 
     }
 
-    // playAudio = (start?: any, position?: number) => {
-    //     this.position = typeof position === 'number' ?
-    //         position : this.position || 0;
-    //     this.startTime = this.ctx.currentTime - this.position || 0;
-    //     this.source.start()
-    //     this.playing = true;
-    // }
-
-    // pauseAudio() {
-    //     if (this.source) {
-
-    //         this.source.stop(0)
-    //         this.source = null;
-    //         this.position = this.ctx.currentTime - this.startTime;
-    //         this.playing = false;
-    //     }
-    // }
+    rewindAudio = () => {
+        // // this.pauseAudio();
+        console.log(this.ctx)
+        // this.ctx.currentTime = 0;
+        // // this.playAudio();
+        // // console.log(this.position);
+    }
 
     pauseAudio() {
         this.playing = false;
@@ -110,7 +96,6 @@ export class AudioDataService {
         } else if (this.ctx.currentTime >= this.getDuration()) {
             return this.getDuration()
         }
-        console.log(this.position)
         return this.position;
     }
 
