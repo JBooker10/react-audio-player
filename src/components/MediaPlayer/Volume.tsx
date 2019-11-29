@@ -3,12 +3,7 @@ import { Grid } from "@material-ui/core";
 import Slider from "@material-ui/core/Slider";
 import VolumeDown from "@material-ui/icons/VolumeDown";
 import VolumeUp from "@material-ui/icons/VolumeUp";
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  fade
-} from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

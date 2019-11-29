@@ -2,7 +2,6 @@ import React from "react";
 import { Paper, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MusicNote from "./../Icons/MusicNote";
-import { Album } from "./../../context/library/libraryContext";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>

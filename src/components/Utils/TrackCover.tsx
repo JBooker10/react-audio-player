@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
-import Playing, { PlayingSquare } from "./../Icons/Playing";
+import Playing from "./../Icons/Playing";
 import MusicNote from "./../Icons/MusicNote";
 import Play from "./../Icons/Play";
 import Pause from "./../Icons/Pause";

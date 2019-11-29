@@ -1,13 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
-import {
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Button,
-  Paper,
-  Link as ButtonLink
-} from "@material-ui/core";
+import { Grid, Button, Paper, Link as ButtonLink } from "@material-ui/core";
 import AuthContext from "./../../context/auth/authContext";
 import history from "./../../config/history";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -97,7 +90,7 @@ const LoginForm: React.FC = ({ props }: any) => {
     if (isAuthenticated) {
       history.push("/");
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated]);
 
   const onChange = (name: keyof IState) => (
     e: React.ChangeEvent<HTMLInputElement>

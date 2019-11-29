@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import moment from "moment";
+import React, { useContext } from "react";
+import { SecondaryPlayButton } from "./../MediaPlayer/PlayButton";
 import CTX from "./../../context/library/libraryContext";
-import { Container, Paper, Grid, Button } from "@material-ui/core";
+import MusicCTX from "./../../context/music/musicContext";
+import { Container, Paper, Grid } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -12,6 +13,11 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "2em",
         margin: 0
         // padding: 0
+      },
+      "& h2": {
+        color: "rgba(226, 225, 255, 1)",
+        fontSize: "1.5em",
+        margin: 0
       },
       "& h3": {
         color: "rgba(226, 225, 255, 1)",
@@ -57,14 +63,13 @@ const Track = ({ match }: any) => {
   const classes = useStyles();
   const ctx = useContext(CTX);
   const { getTrack, track, loading } = ctx;
+  const audioCTX = useContext(MusicCTX);
 
-  useEffect(() => getTrack(match.params.id), track);
+  getTrack(match.params.id);
 
-  if (loading) {
+  if (loading || Object.keys(track).length <= 0) {
     return <p>Loading</p>;
   }
-
-  console.log(track);
 
   return (
     <Container className={classes.root} style={{ marginTop: "4em" }}>
@@ -73,7 +78,11 @@ const Track = ({ match }: any) => {
       <Grid container>
         <Grid item>
           <Paper className={classes.paper}>
-            <img src={track.Album.CoverXL} alt="" className={classes.image} />
+            <img
+              src={track && track.Album.CoverXL}
+              alt=""
+              className={classes.image}
+            />
           </Paper>
         </Grid>
         <Grid lg="auto" item>
@@ -88,12 +97,23 @@ const Track = ({ match }: any) => {
             </Grid>
             <br />
             <Grid>
-              {/* <span style={{ color: "#888" }}>{track.Lyrics}</span> */}
-              <Button className={classes.button}>Play</Button>
+              <SecondaryPlayButton audio={audioCTX} track={track} />
             </Grid>
           </Container>
         </Grid>
       </Grid>
+      <br />
+      <br />
+      <Grid lg={8}>
+        <h2>Lyrics</h2>
+        <p style={{ color: "#888" }}>{track.Lyrics}</p>
+      </Grid>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Container>
   );
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Paper, Grid, Typography, Hidden } from "@material-ui/core";
 import MusicNote from "./../Icons/MusicNote";
-import AlbumCover from "../Albums/AlbumCover";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,7 +55,7 @@ const AudioMetaData = (props: any): JSX.Element => {
       <Grid container>
         <Paper className={classes.paper}>
           {metaData && metaData.albumCover ? (
-            <img src={metaData.albumCover} className={classes.cover} />
+            <img src={metaData.albumCover} alt="" className={classes.cover} />
           ) : (
             <MusicNote color="#e2e1ff" height={35} width={35} />
           )}

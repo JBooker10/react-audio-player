@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from "react";
+import React, { Fragment } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import Navbar from "./Navbar";

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from "react";
 
-import LibraryCTX, { Track } from "./../../context/library/libraryContext";
+import LibraryCTX from "./../../context/library/libraryContext";
 import MusicCTX from "./../../context/music/musicContext";
-
 import { Container, Box } from "@material-ui/core";
 import TrackCover from "./../Utils/TrackCover";
 

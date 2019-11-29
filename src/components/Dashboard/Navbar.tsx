@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const HomeNavbar = ({ drawerToggle }: any): JSX.Element => {
   const authContext = useContext(AuthContext);
   const musicContext = useContext(MusicCTX);
-  const { logoutUser, user, loading } = authContext;
+  const { logoutUser, user } = authContext;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const classes = useStyles();
 

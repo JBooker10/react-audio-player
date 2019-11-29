@@ -1,7 +1,6 @@
 import React from "react";
 // import Logo from "./../Icons/Logo";
 import {
-  Divider,
   List,
   Button,
   ListItem,

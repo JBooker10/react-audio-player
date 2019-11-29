@@ -55,7 +55,7 @@ const AudioProgessBar = ({ audio }: any) => {
       requestRef.current = requestAnimationFrame(animate);
       return () => cancelAnimationFrame(requestRef.current);
     }
-  }, []);
+  }, [animate, completed]);
 
   return (
     <Grid className={classes.slider}>
