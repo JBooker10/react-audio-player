@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
-import Playing from "./../Icons/Playing";
-import MusicNote from "./../Icons/MusicNote";
-import Play from "./../Icons/Play";
-import Pause from "./../Icons/Pause";
+import Playing from "../Icons/Playing";
+import MusicNote from "../Icons/MusicNote";
+import Play from "../Icons/Play";
+import Pause from "../Icons/Pause";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 

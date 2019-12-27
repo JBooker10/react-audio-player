@@ -1,27 +1,18 @@
-import React, { useContext, useEffect } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
 import LibraryCTX from "./../../context/library/libraryContext";
 import MusicCTX from "./../../context/music/musicContext";
-import { Container, Box } from "@material-ui/core";
-import TrackCover from "./../Utils/TrackCover";
-
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    box: {
-      display: "flex",
-      flexWrap: "wrap",
-      alignContent: "flex-start"
-    }
-  })
-);
+import { Container, Grid } from "@material-ui/core";
+import TrackData from "../Tracks/TrackData";
+import ListIcon from "@material-ui/icons/List";
+import AppsIcon from "@material-ui/icons/Apps";
 
 const Albums = () => {
-  const classes = useStyles();
   const ctx = useContext(LibraryCTX);
   const audio = useContext(MusicCTX);
+  const [display, setDisplay] = useState(true);
   const { tracks, loading } = ctx;
+
+  const toggleDisplay = () => setDisplay(!display);
 
   useEffect(ctx.getTracks, []);
 
@@ -36,13 +27,27 @@ const Albums = () => {
         color: "#fff"
       }}
     >
-      <h1>Tracks</h1>
-      <Box className={classes.box}>
-        {tracks.length > 0 &&
-          tracks.map((track: any) => (
-            <TrackCover key={track.Hash} track={track} audio={audio} />
-          ))}
-      </Box>
+      <Grid
+        container
+        alignItems="center"
+        justify="space-between"
+        style={{ padding: "1em" }}
+      >
+        <Grid item>
+          <h1>Tracks</h1>
+        </Grid>
+        <Grid item>
+          <div onClick={toggleDisplay}>
+            {display ? (
+              <AppsIcon fontSize="large" />
+            ) : (
+              <ListIcon fontSize="large" />
+            )}
+          </div>
+        </Grid>
+      </Grid>
+
+      <TrackData tracks={tracks} audio={audio} display={display} />
     </Container>
   );
 };
